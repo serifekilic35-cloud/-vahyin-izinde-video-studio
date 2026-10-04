@@ -497,54 +497,7 @@ function testVoice(){
     status.innerHTML =
       "❌ Video hazırlanırken hata oluştu.";
   }
-}script = document.getElementById("script").value;
 
-  if (!script.trim()) {
-    alert("Seslendirme metni boş olamaz.");
-    return;
-  }
-
-  const status = document.getElementById("status");
-  status.style.display = "block";
-  status.innerHTML = "⏳ Video hazırlanıyor... Lütfen bekleyin.";
-
-  try {
-    const response = await fetch("/api/render", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        duration: 10
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error("Video oluşturulamadı.");
-    }
-
-    const blob = await response.blob();
-const file = new File([blob], "vahyin-izinde.mp4", {
-  type: "video/mp4"
-});
-
-if (navigator.share && navigator.canShare &&
-    navigator.canShare({ files: [file] })) {
-  await navigator.share({
-    files: [file],
-    title: "Vahyin İzinde Video"
-  });
-
-  status.innerHTML = "✓ Video hazır. Kaydetmek için paylaşım menüsünü kullan.";
-} else {
-  const url = URL.createObjectURL(blob);
-  window.location.href = url;
-  status.innerHTML = "✓ Video hazır.";
-} catch (error) {
-  console.error(error);
-  status.innerHTML = "❌ Video hazırlanırken hata oluştu.";
-}
-}
 </script>
 </body>
 </html>
