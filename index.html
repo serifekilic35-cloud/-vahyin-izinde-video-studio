@@ -452,7 +452,7 @@ function testVoice(){
   status.innerHTML = "⏳ Video hazırlanıyor... Lütfen bekleyin.";
 
   try {
-    const response = await fetch("/api/render", {
+    const response = await fetch("https://vahyin-izinde-video-api.onrender.com/api/render", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
