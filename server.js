@@ -96,9 +96,11 @@ const server = http.createServer((req, res) => {
 
         stream.pipe(res);
 
-        stream.on("close", () => {
-          fs.unlink(output, () => {});
-        });
+      res.on("finish", () => {
+  setTimeout(() => {
+    fs.unlink(output, () => {});
+  }, 60000);
+});
       });
     });
 
