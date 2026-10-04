@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vahyin İzinde Video Studio</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at top,#183c50 0,#08141d 40%,#03080c 100%);
+  color:#fff;
+  min-height:100vh;
+}
+
+header{
+  text-align:center;
+  padding:38px 20px 24px;
+}
+
+.logo{
+  width:64px;
+  height:64px;
+  margin:auto;
+  border:1px solid #d9ae55;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  background:#091820;
+  box-shadow:0 0 30px rgba(218,174,85,.2);
+}
+
+h1{
+  margin:14px 0 5px;
+  font-family:Georgia,serif;
+  font-size:30px;
+  color:#f0c66d;
+}
+
+.subtitle{
+  color:#b7c3c9;
+  font-size:14px;
+}
+
+.container{
+  width:min(720px,92%);
+  margin:auto;
+  padding-bottom:60px;
+}
+
+.card{
+  background:rgba(13,29,39,.92);
+  border:1px solid rgba(218,174,85,.22);
+  border-radius:20px;
+  padding:20px;
+  margin:15px 0;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+}
+
+.step{
+  color:#e5bd67;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+h2{
+  margin:7px 0 15px;
+  font-size:20px;
+}
+
+label{
+  display:block;
+  margin:13px 0 7px;
+  color:#d5dde1;
+  font-size:14px;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid #34505e;
+  background:#071219;
+  color:white;
+  border-radius:12px;
+  padding:14px;
+  font-size:16px;
+  outline:none;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:#e0b65d;
+}
+
+.upload{
+  border:1px dashed #ba9347;
+  border-radius:14px;
+  padding:22px;
+  text-align:center;
+  background:#091820;
+}
+
+.upload input{
+  margin-top:12px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:16px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.gold{
+  margin-top:15px;
+  color:#171007;
+  background:linear-gradient(135deg,#f4d487,#c9963d);
+}
+
+.secondary{
+  margin-top:10px;
+  background:#173040;
+  color:white;
+  border:1px solid #34505e;
+}
+
+.preview-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:15px;
+}
+
+.preview{
+  position:relative;
+  width:225px;
+  aspect-ratio:9/16;
+  background:linear-gradient(#172f40,#02070a);
+  border-radius:18px;
+  overflow:hidden;
+  border:2px solid #a98443;
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:18px;
+  background:linear-gradient(transparent 45%,rgba(0,0,0,.85));
+}
+
+.preview-title{
+  color:#f2c66c;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.preview-text{
+  margin-top:7px;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.brand{
+  margin-top:12px;
+  color:#e7bd64;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.status{
+  display:none;
+  text-align:center;
+  margin-top:14px;
+  padding:12px;
+  background:#102c23;
+  border:1px solid #2e6850;
+  border-radius:12px;
+  color:#bce8cf;
+}
+
+.note{
+  font-size:12px;
+  line-height:1.5;
+  color:#8fa2ac;
+  margin-top:12px;
+}
+
+footer{
+  text-align:center;
+  color:#758792;
+  padding:20px;
+  font-size:12px;
+}
+
+@media(max-width:500px){
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">☾</div>
+  <h1>Vahyin İzinde</h1>
+  <div class="subtitle">Shorts Video Studio</div>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <div class="step">ADIM 1</div>
+    <h2>Video Konusu</h2>
+
+    <label>Başlık</label>
+    <input
+      id="title"
+      value="Ömrün Geçiyor… Peki Geriye Ne Kalıyor?"
+      placeholder="Video başlığını yaz">
+
+    <label>Seslendirme metni</label>
+    <textarea id="script">Hiç düşündün mü?
+
+Allah neden zamana yemin ediyor?
+
+Zamana yemin olsun ki insan gerçekten ziyandadır.
+
+Her geçen dakika ömrümüzden eksiliyor.
+
+Kaybettiğimiz para geri gelebilir. Kaçırdığımız bir fırsat yeniden karşımıza çıkabilir.
+
+Ama geçen bir dakika… bir daha asla geri gelmez.
+
+Asr Suresi bize o zamanı nasıl kurtaracağımızı da gösteriyor:
+
+İman etmek…
+İyi ve güzel işler yapmak…
+Birbirimize hakkı hatırlatmak…
+Ve sabrı tavsiye etmek…
+
+Belki de mesele ne kadar yaşayacağımız değil…
+
+Bize verilen ömürle ne yaptığımızdır.
+
+Çünkü zaman geçmiyor yalnızca…
+
+Biz geçiyoruz.</textarea>
+  </section>
+
+  <section class="card">
+    <div class="step">ADIM 2</div>
+    <h2>Görseller</h2>
+
+    <div class="upload">
+      <div>📷</div>
+      <strong>9:16 görsellerini seç</strong>
+      <div class="note">
+        Telefonundan bir veya birden fazla görsel seçebilirsin.
+      </div>
+
+      <input
+        id="images"
+        type="file"
+        accept="image/*"
+        multiple>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="step">ADIM 3</div>
+    <h2>Seslendirme</h2>
+
+    <div class="row">
+      <div>
+        <label>Ses</label>
+        <select id="voice">
+          <option>Sakin kadın sesi</option>
+          <option>Derin kadın sesi</option>
+          <option>Sakin erkek sesi</option>
+          <option>Derin erkek sesi</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Okuma hızı</label>
+        <select id="speed">
+          <option>0.90x — Sakin</option>
+          <option>1.00x — Normal</option>
+          <option>1.10x — Hızlı</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="secondary" onclick="testVoice()">
+      🔊 Seslendirmeyi Test Et
+    </button>
+
+    <div class="note">
+      İlk sürümde test için telefonun tarayıcı seslendirmesi kullanılır.
+      Daha doğal yapay sesi sonraki aşamada bağlayacağız.
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="step">ADIM 4</div>
+    <h2>Shorts Önizleme</h2>
+
+    <div class="preview-wrap">
+      <div class="preview">
+        <img id="previewImage">
+
+        <div class="overlay">
+          <div class="preview-title" id="previewTitle">
+            Ömrün Geçiyor…
+          </div>
+
+          <div class="preview-text">
+            Zaman geçmiyor yalnızca…<br>
+            <strong>Biz geçiyoruz.</strong>
+          </div>
+
+          <div class="brand">
+            VAHYİN İZİNDE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="gold" onclick="prepareVideo()">
+      ✦ VİDEOYU HAZIRLA
+    </button>
+
+    <div class="status" id="status">
+      ✓ Proje hazır. Bir sonraki aşamada MP4 oluşturma motorunu bağlayacağız.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Vahyin İzinde • Video Studio
+</footer>
+
+<script>
+const title = document.getElementById("title");
+const previewTitle = document.getElementById("previewTitle");
+const images = document.getElementById("images");
+const previewImage = document.getElementById("previewImage");
+
+title.addEventListener("input", () => {
+  previewTitle.textContent =
+    title.value || "Vahyin İzinde";
+});
+
+images.addEventListener("change", () => {
+  const file = images.files[0];
+
+  if(file){
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+      previewImage.src = e.target.result;
+      previewImage.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+  }
+});
+
+function testVoice(){
+  const text =
+    document.getElementById("script").value;
+
+  if(!text.trim()){
+    alert("Önce seslendirme metnini yaz.");
+    return;
+  }
+
+  if(!("speechSynthesis" in window)){
+    alert("Bu tarayıcı seslendirme özelliğini desteklemiyor.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+  speech.lang = "tr-TR";
+
+  const speed =
+    document.getElementById("speed").selectedIndex;
+
+  speech.rate =
+    speed === 0 ? 0.9 :
+    speed === 1 ? 1 :
+    1.1;
+
+  speech.pitch = 1;
+
+  speechSynthesis.speak(speech);
+}
+
+function prepareVideo(){
+  const script =
+    document.getElementById("script").value;
+
+  if(!script.trim()){
+    alert("Seslendirme metni boş olamaz.");
+    return;
+  }
+
+  document.getElementById("status").style.display =
+    "block";
+}
+</script>
+
+</body>
+</html>
