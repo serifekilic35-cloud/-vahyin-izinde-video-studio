@@ -68,7 +68,7 @@ if (req.method === "OPTIONS") {
 
       const args = [
         "-f", "lavfi",
-        "-i", "color=c=0x081820:s=1080x1920:r=30",
+        "-i", "color=c=0x081820:s=540x960:r=15",
         "-t", String(duration),
         "-c:v", "libx264",
         "-pix_fmt", "yuv420p",
