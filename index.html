@@ -467,24 +467,22 @@ async function prepareVideo() {
     }
 
     const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
+const file = new File([blob], "vahyin-izinde.mp4", {
+  type: "video/mp4"
+});
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "vahyin-izinde.mp4";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+if (navigator.share && navigator.canShare &&
+    navigator.canShare({ files: [file] })) {
+  await navigator.share({
+    files: [file],
+    title: "Vahyin İzinde Video"
+  });
 
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-
-    status.innerHTML = "✓ Video hazır. MP4 indirildi.";
-  } catch (error) {
-    console.error(error);
-    status.innerHTML = "❌ Video hazırlanırken hata oluştu.";
-  }
+  status.innerHTML = "✓ Video hazır. Kaydetmek için paylaşım menüsünü kullan.";
+} else {
+  const url = URL.createObjectURL(blob);
+  window.location.href = url;
+  status.innerHTML = "✓ Video hazır.";
 }
-</script>
-
 </body>
 </html>
