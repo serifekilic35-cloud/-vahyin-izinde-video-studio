@@ -483,6 +483,11 @@ if (navigator.share && navigator.canShare &&
   const url = URL.createObjectURL(blob);
   window.location.href = url;
   status.innerHTML = "✓ Video hazır.";
+} catch (error) {
+  console.error(error);
+  status.innerHTML = "❌ Video hazırlanırken hata oluştu.";
 }
+}
+</script>
 </body>
 </html>
